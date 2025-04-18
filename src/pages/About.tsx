@@ -171,13 +171,15 @@ const About: React.FC = () => {
           <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
             Experience the perfect blend of ancient wisdom and modern convenience in planning your next trip.
           </p>
-          <Button 
-            variant="primary" 
-            onClick={() => navigate('/scheduler')}
-            className="text-lg px-8 py-3"
-          >
-            Plan Your Journey
-          </Button>
+          <div className="flex justify-center">
+            <Button 
+              variant="primary" 
+              onClick={() => navigate('/scheduler')}
+              className="text-lg px-8 py-3"
+            >
+              Plan Your Journey
+            </Button>
+          </div>
         </motion.div>
       </div>
     </div>

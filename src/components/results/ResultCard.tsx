@@ -64,7 +64,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ date, index }) => {
       
       <div className="bg-cream-50 px-4 py-3 flex justify-end">
         <button className="text-sm text-saffron-600 hover:text-saffron-700 font-medium flex items-center">
-          <span>Save this date</span>
+          {/* <span>Save this date</span> */}
         </button>
       </div>
     </motion.div>

@@ -33,6 +33,7 @@ const CallToAction: React.FC = () => {
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
+            className="flex justify-center"
           >
             <Button 
               variant="secondary" 

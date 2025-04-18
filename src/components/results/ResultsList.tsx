@@ -1,72 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useJourney } from '../../contexts/JourneyContext';
 import ResultCard from './ResultCard';
-import { Calendar, MapPin } from 'lucide-react';
+// import { Calendar, MapPin } from 'lucide-react';
 import Button from '../common/Button';
 import { useNavigate } from 'react-router-dom';
+import html2pdf from 'html2pdf.js';
 
 const ResultsList: React.FC = () => {
   const { formData, results } = useJourney();
   const navigate = useNavigate();
+  const resultsRef = useRef<HTMLDivElement>(null);
+  
+  const handleDownloadPDF = () => {
+    if (!resultsRef.current) return;
+    
+    const options = {
+      margin: 10,
+      filename: `${formData.fullName}_travel_dates.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    html2pdf().from(resultsRef.current).set(options).save();
+  };
   
   if (results.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-gray-600">No results found. Please try with different dates.</p>
-        <Button
-          variant="primary"
-          className="mt-4"
-          onClick={() => navigate('/scheduler')}
-        >
-          Back to Journey Planner
-        </Button>
-      </div>
-    );
+    // ...existing code...
   }
   
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" ref={resultsRef}>
       <motion.div 
         className="bg-cream-50 rounded-lg p-5 shadow border border-gold-200"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h3 className="font-heading text-xl text-maroon-800 mb-3">Journey Details</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex items-center">
-            <MapPin className="h-5 w-5 text-saffron-500 mr-2" />
-            <div>
-              <span className="text-sm text-gray-500">From</span>
-              <p className="font-medium">{formData.currentLocation}</p>
-            </div>
-          </div>
-          <div className="flex items-center">
-            <MapPin className="h-5 w-5 text-saffron-500 mr-2" />
-            <div>
-              <span className="text-sm text-gray-500">To</span>
-              <p className="font-medium">{formData.destination}</p>
-            </div>
-          </div>
-          <div className="flex items-center">
-            <Calendar className="h-5 w-5 text-saffron-500 mr-2" />
-            <div>
-              <span className="text-sm text-gray-500">Travel Window</span>
-              <p className="font-medium">
-                {formData.startDate?.toLocaleDateString()} - {formData.endDate?.toLocaleDateString()}
-              </p>
-            </div>
-          </div>
-          {formData.purpose && (
-            <div className="flex col-span-1 md:col-span-2">
-              <div>
-                <span className="text-sm text-gray-500">Purpose</span>
-                <p className="font-medium">{formData.purpose}</p>
-              </div>
-            </div>
-          )}
-        </div>
+        {/* ...existing code... */}
       </motion.div>
 
       <motion.div
@@ -91,7 +63,10 @@ const ResultsList: React.FC = () => {
           >
             Plan Another Journey
           </Button>
-          <Button variant="secondary">
+          <Button 
+            variant="secondary"
+            onClick={handleDownloadPDF}
+          >
             Download as PDF
           </Button>
         </div>
