@@ -22,6 +22,9 @@ const About: React.FC = () => {
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Discover how we blend ancient wisdom with modern technology to help you find the most auspicious times for your journey.
           </p>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Inspired by Prof. RKK Verma
+          </p>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
