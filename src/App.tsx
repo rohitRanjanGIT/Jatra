@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { JourneyProvider } from './contexts/JourneyContext';
 import Navbar from './components/common/Navbar';
@@ -17,6 +17,7 @@ function App() {
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="*" element={<Home />} />
               <Route path="/scheduler" element={<JourneyScheduler />} />
               <Route path="/results" element={<Results />} />
               <Route path="/about" element={<About />} />
